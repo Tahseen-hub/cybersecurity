@@ -11,7 +11,7 @@
 
 ## 2. Vulnerability Found
 
-The `SQL Injection` module accepts a `User ID` parameter (`id`) and passes it into a SQL query used to look up user records. Depending on the configured security level, this parameter is handled with varying degrees of sanitization, exposing different classes of SQL injection.
+The `SQL Injection` module accepts a `User ID` parameter (`id`) and passes it into a SQL query used to look up user records. Depending on the configured security level, this parameter is handled with varying degrees of sanitization, exposing different classes of SQL injection. 
 
 ---
 
