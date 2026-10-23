@@ -59,7 +59,7 @@ $stmt->close();
 ```
 Because the `?` placeholder is bound via `bind_param()` and never concatenated into the query string, both payloads above are treated as literal search values, not SQL syntax — neither returns extra rows nor breaks the query.
 
-**Evidence (pick from your screenshots folder):**
+**Evidence (from screenshots folder):**
 - `screenshots/01-low-injection-payload1.png` — result of `1' OR '1'='1`
 - `screenshots/02-low-injection-payload2-union.png` — result of the UNION payload dumping hashes
 - `screenshots/03-low-source.png` — the vulnerable source code view
@@ -94,7 +94,7 @@ Result: **successful**. Because the query has no surrounding quotes and no numer
 
 **Fix:** The same parameterized statement shown in section 2.1 resolves this level too — since `bind_param()` never concatenates `$id` into the query regardless of whether it contains quotes, the quote-less UNION bypass that defeated `mysql_real_escape_string()` has no effect against it. This demonstrates why escaping alone is an incomplete defense: the fix must remove string concatenation entirely, not just neutralize specific characters.
 
-**Evidence (pick from your screenshots folder):**
+**Evidence (from screenshots folder):**
 - `screenshots/04-medium-blocked-quote.png` — syntax error from the quote-based payload being blocked
 - `screenshots/05-medium-bypass-union.png` — successful quote-less UNION bypass dumping hashes
 - `screenshots/06-medium-source.png` — the partially-mitigated source code view
@@ -122,7 +122,7 @@ Result: both payloads were rejected, since any non-numeric input fails the `is_n
 
 **Fix:** High's `is_numeric()` check happens to block both payloads tested here, but it is still a workaround rather than a structural fix — it only holds because this particular field is expected to be numeric. The parameterized statement from section 2.1 is the recommended fix even at this level, since it removes the injection vector entirely rather than relying on the input always being validatable as numeric (a type check offers no protection the moment a field legitimately needs to accept non-numeric text, e.g. a search-by-name feature).
 
-**Evidence (pick from your screenshots folder):**
+**Evidence (from screenshots folder):**
 - `screenshots/07-high-blocked.png` — both payloads rejected
 - `screenshots/08-high-source.png` — the effectively-mitigated source code view
 
