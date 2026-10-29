@@ -1,4 +1,4 @@
-# UneeQ Interns — Cybersecurity Track Internship Projects
+# Cybersecurity Track Internship Projects
 
 This repository contains all completed tasks for the Cybersecurity track of the UneeQ Interns internship program. All testing was performed in an isolated, self-hosted lab environment (DVWA and Metasploitable2 running on a Host-only VirtualBox network) for training purposes only.
 
